@@ -1,44 +1,32 @@
-/* MOVE THIS TO THE VERY TOP OF globals.css */
-:root {
-  color-scheme: dark;
-}
-
-html, body {
-  background-color: #000000 !important;
-}
-
 @import "tailwindcss";
-/* ... rest of your code */
 
-body {
+:root {
+  color-scheme: dark !important;
+}
+
+/* This is the absolute first thing the browser paints */
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   width: 100%;
-  background-color: #000000 !important; /* Changed to pure black to match loader */
-  color: white;
+  height: 100%;
+  background-color: #111111 !important;
+  color: #ffffff;
   overflow-x: hidden;
 }
 
-/* Make the scrollbar thin and Ferrari Red */
+/* Ensures the Canvas doesn't start white or black, but exactly #111111 */
+canvas {
+  background-color: #111111 !important;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #111;
+  background: #111111;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #D40000;
   border-radius: 10px;
-}
-
-/* This ensures your HTML sections don't block the 3D interactions */
-.pointer-events-none {
-  pointer-events: none;
-}
-
-.pointer-events-auto {
-  pointer-events: auto;
 }

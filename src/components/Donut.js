@@ -13,7 +13,7 @@ export default function Donut() {
     return new THREE.TorusKnotGeometry(
       0.8,       // radius
       0.1,       // tube radius
-      656,       // tubular segments — reduced from 856
+      256, 
       28,        // radial segments — reduced from 72
       3,         // p
       14         // q

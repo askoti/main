@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 export default function Loader() {
   return (
     // REMOVED: Motion from this div so it is PITCH BLACK the millisecond it hits the DOM
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black">
-      
+// Outermost div
+<div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#111111]">      
       {/* Keep the motion on the content inside, but not the background. 
          This ensures the user sees BLACK immediately, not white.
       */}

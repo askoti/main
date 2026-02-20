@@ -1,15 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Kastriot Aliu - Strategic Digital Deployment",
@@ -24,26 +13,20 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#111111", // Sets the mobile browser UI color
+  colorScheme: "dark",
+};
+
 export default function RootLayout({ children }) {
   return (
-    // Added style here as a backup
-    <html lang="en" className="dark" style={{ backgroundColor: '#000000' }}>
+    <html lang="en" className="dark" style={{ backgroundColor: "#111111" }}>
       <head>
-        {/* THE FIX: This tiny script forces the browser to paint black before JS even executes */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.documentElement.style.backgroundColor = '#000000';
-              document.body.style.backgroundColor = '#000000';
-            `,
-          }}
-        />
+        <style dangerouslySetInnerHTML={{ __html: `
+          html, body { background: #111111 !important; }
+        `}} />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
-        style={{ backgroundColor: '#000000' }}
-        suppressHydrationWarning={true} 
-      >
+      <body className="antialiased bg-[#111111] text-white" style={{ backgroundColor: "#111111" }}>
         {children}
       </body>
     </html>
