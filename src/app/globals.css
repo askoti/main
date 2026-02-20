@@ -1,16 +1,22 @@
-@import "tailwindcss";
-
+/* MOVE THIS TO THE VERY TOP OF globals.css */
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  color-scheme: dark;
 }
 
 html, body {
+  background-color: #000000 !important;
+}
+
+@import "tailwindcss";
+/* ... rest of your code */
+
+body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: #111111;
+  background-color: #000000 !important; /* Changed to pure black to match loader */
+  color: white;
   overflow-x: hidden;
 }
 
