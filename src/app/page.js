@@ -8,7 +8,7 @@ const Scene = dynamic(() => import('@/components/Scene'), {
 
 export default function Home() {
   return (
-    <main className="bg-black min-h-screen">
+    <main className="bg-black h-screen">
       <Scene />
     </main>
   );

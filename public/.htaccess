@@ -1,16 +1,5 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  
-  # 1. Force the server to find Next.js static chunks
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
-
-# 2. Prevent Cache Mismatch (Fixes the 5-hour Chunk Error)
-# This tells the browser to check if the JS chunks have changed
-<filesMatch "\.(js|css|json)$">
+# Disable Caching for HTML and JS during development/deployment phase
+<filesMatch "\.(html|js|css)$">
   FileETag None
   <ifModule mod_headers.c>
     Header unset ETag
@@ -20,5 +9,5 @@
   </ifModule>
 </filesMatch>
 
-# 3. Security & Performance
-Header set X-Content-Type-Options "nosniff"
+# Fix for Next.js 404 on Chunks
+ErrorDocument 404 /index.html

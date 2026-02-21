@@ -4,22 +4,27 @@
   color-scheme: dark !important;
 }
 
-/* This is the absolute first thing the browser paints */
+/* Kills the white flash and the extra ghost page */
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  /* This prevents the browser from doing its own scrolling */
+  overflow: hidden !important; 
   background-color: #111111 !important;
   color: #ffffff;
-  overflow-x: hidden;
+  /* Fixes mobile "bounce" and address bar issues */
+  position: fixed;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Ensures the Canvas doesn't start white or black, but exactly #111111 */
 canvas {
   background-color: #111111 !important;
+  outline: none;
 }
 
+/* Custom Scrollbar for your virtual scroll */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -29,4 +34,11 @@ canvas {
 ::-webkit-scrollbar-thumb {
   background: #D40000;
   border-radius: 10px;
+}
+
+/* Hide any Hostinger injected pixels or scripts that cause extra height */
+body > *:not(main):not(#__next):not(div) {
+  display: none !important;
+  height: 0 !important;
+  position: absolute;
 }

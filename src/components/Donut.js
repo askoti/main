@@ -27,17 +27,19 @@ export default function Donut() {
     if (!meshRef.current) return;
 
     const offset = scroll.offset;
-    const time = state.clock.elapsedTime;
+    
+    // FIX: Use .getElapsedTime() to stop the deprecation warning
+    const time = state.clock.getElapsedTime();
 
     // Smooth mouse tilt
     const mouseX = state.mouse.x * 0.4;
     const mouseY = state.mouse.y * 0.4;
 
-    // Heavy rotation, but smoother with fewer computations
+    // Heavy rotation
     meshRef.current.rotation.x += (mouseY + offset * Math.PI * 2 - meshRef.current.rotation.x) * 0.05;
     meshRef.current.rotation.y += (mouseX + offset * Math.PI * 4 - meshRef.current.rotation.y) * 0.05;
 
-    // Constant slow drift
+    // Constant slow drift (Delta is already time-independent, this is perfect)
     meshRef.current.rotation.z += delta * 0.2;
   });
 

@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
-  // This ensures paths always end in a slash, helping Hostinger's 
-  // Apache/Nginx server find the static files
   trailingSlash: true,
-  // This helps prevent chunk errors during re-deploys
-  generateBuildId: async () => 'build-' + Date.now(),
+  // This forces Next.js to use a consistent path for all assets
+  distDir: '.next', 
+  // This helps prevent 404s when navigating between pages/scrolls
+  images: {
+    unoptimized: true, 
+  },
 };
 
 export default nextConfig;
