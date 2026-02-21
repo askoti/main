@@ -211,7 +211,7 @@ export default function Portfolio() {
                           <a href="mailto:kastriootaliiu@gmail.com" className="block text-red-600 hover:text-white transition-colors border-b border-red-600/20 pb-2 w-fit italic">kastriootaliiu@gmail.com</a>
                           <div className="flex gap-8 items-center pointer-events-auto">
                             <a href="https://github.com/askoti" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest">GitHub</a>
-                            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest">LinkedIn</a>
+                            <a href="https://linkedin.com/in/kastriootaliiu" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest">LinkedIn</a>
                           </div>
                         </div>
                       </div>
