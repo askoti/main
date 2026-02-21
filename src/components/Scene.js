@@ -22,7 +22,7 @@ export default function Scene() {
     setMounted(true);
   }, []);
 
-  const pages = useMemo(() => (typeof window !== "undefined" && window.innerWidth < 768 ? 9 : 7), []);
+  const pages = useMemo(() => (typeof window !== "undefined" && window.innerWidth < 768 ? 9.5 : 7), []);
 
   if (!mounted) return <div className="h-screen w-screen bg-black" />;
 
