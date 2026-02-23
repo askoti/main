@@ -1,59 +1,69 @@
-"use client";
-import { useRef, useMemo } from "react";
-import { useFrame } from "@react-three/fiber";
+// "use client";
+import React, { useRef, useMemo, Suspense } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "@react-three/drei";
 import * as THREE from "three";
 
-export default function Donut() {
+function DonutContent() {
   const meshRef = useRef();
   const scroll = useScroll();
+  const { viewport } = useThree(); // Removed 'invalidate' as we'll use auto-render for smoother mouse movement
 
-  // UseMemo to create geometry once instead of every render
-  const geometry = useMemo(() => {
-    return new THREE.TorusKnotGeometry(
-      0.8,       // radius
-      0.1,       // tube radius
-      256, 
-      28,        // radial segments — reduced from 72
-      3,         // p
-      14         // q
-    );
-  }, []);
+  // 1. Geometry is perfectly memoized—won't lag on re-renders
+  const geometry = useMemo(() => 
+    new THREE.TorusKnotGeometry(0.8, 0.1, 528, 16, 3, 14), 
+  []);
 
-  // Precompute scale (only once per client render)
-  const scale = typeof window !== "undefined" && window.innerWidth < 768 ? 0.5 : 0.7;
+  // 2. Scale Logic: Perfectly responsive
+  const responsiveScale = useMemo(() => {
+    const base = viewport.width / 8; 
+    return Math.max(0.5, Math.min(base, 1.2)); 
+  }, [viewport.width]);
 
-  useFrame((state, delta) => {
+  const targetRotation = useRef(new THREE.Euler());
+
+  useFrame((state) => {
     if (!meshRef.current) return;
 
     const offset = scroll.offset;
-    
-    // FIX: Use .getElapsedTime() to stop the deprecation warning
     const time = state.clock.getElapsedTime();
 
-    // Smooth mouse tilt
     const mouseX = state.mouse.x * 0.4;
     const mouseY = state.mouse.y * 0.4;
 
-    // Heavy rotation
-    meshRef.current.rotation.x += (mouseY + offset * Math.PI * 2 - meshRef.current.rotation.x) * 0.05;
-    meshRef.current.rotation.y += (mouseX + offset * Math.PI * 4 - meshRef.current.rotation.y) * 0.05;
+    // 3. Smooth Rotation Logic
+    targetRotation.current.x = mouseY + offset * Math.PI * 2;
+    targetRotation.current.y = mouseX + offset * Math.PI * 4;
+    targetRotation.current.z = time * 0.2;
 
-    // Constant slow drift (Delta is already time-independent, this is perfect)
-    meshRef.current.rotation.z += delta * 0.2;
+    // Standard Lerp for that "heavy/expensive" physics feel
+    meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotation.current.x, 0.05);
+    meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotation.current.y, 0.05);
+    meshRef.current.rotation.z = THREE.MathUtils.lerp(meshRef.current.rotation.z, targetRotation.current.z, 0.05);
   });
 
   return (
-    <mesh ref={meshRef} scale={scale} geometry={geometry}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <meshStandardMaterial 
-        color="#D40000"       
-        roughness={0.3}      
-        metalness={0.55}     
-        emissive="#110000"
-        emissiveIntensity={1}
+    <mesh 
+      ref={meshRef} 
+      scale={responsiveScale} 
+      geometry={geometry}
+      frustumCulled={true}
+    >
+      <meshStandardMaterial
+        color="#D40000"
+        roughness={0.2} // Slightly smoother for better light reflections
+        metalness={0.8}  // Increased for a more "industrial/premium" look
+        emissive="#440000" // Brightened slightly so it glows on your black background
+        emissiveIntensity={0.5}
       />
     </mesh>
+  );
+}
+
+export default function Donut() {
+  return (
+    <Suspense fallback={null}>
+      <DonutContent />
+    </Suspense>
   );
 }
