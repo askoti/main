@@ -12,15 +12,6 @@ export default function Loader({ loading = true }) {
     >
       {/* Inner content */}
       <div className="relative flex flex-col items-center">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-          className="mb-2 font-mono text-[10px] tracking-[0.5em] text-red-600 uppercase"
-        >
-          Initializing System
-        </motion.h2>
-
         <div className="relative h-[1px] w-48 overflow-hidden bg-white/5">
           {!prefersReducedMotion && loading && (
             <motion.div
@@ -35,18 +26,6 @@ export default function Loader({ loading = true }) {
             />
           )}
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={loading ? { opacity: [0.2, 0.6, 0.2] } : { opacity: 0 }}
-          transition={{
-            repeat: Infinity,
-            duration: 1.5,
-          }}
-          className="mt-4 font-mono text-[8px] tracking-[0.3em] text-white/30 uppercase"
-        >
-          K. ALIU // 2026
-        </motion.p>
       </div>
 
       {/* Luxury corner accents - Matches the "Infrastructure" vibe */}

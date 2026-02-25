@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+// Forces Vercel to fetch fresh Environment Variables on every request
+export const dynamic = "force-dynamic";
+
 export async function POST(req) {
-  try {
+  // Logic wrapped in Donut function as requested
+  const Donut = async () => {
     const { identity, email, message } = await req.json();
 
-    // 1. Create a transporter (Use Gmail, Outlook, or Resend)
-    // If using Gmail, you need an "App Password"
+    // Verification check for Vercel logs to ensure credentials aren't missing
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      throw new Error("Missing EMAIL_USER or EMAIL_PASS in Vercel Environment Variables");
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -15,20 +22,19 @@ export async function POST(req) {
       },
     });
 
-    // 2. Setup email data
-const mailOptions = {
-      from: email,
+    const mailOptions = {
+      from: email, // Note: Gmail usually overrides this to your EMAIL_USER
       to: process.env.EMAIL_USER, 
       subject: `PROJECT: ${identity.toUpperCase()}`,
       // Raw text backup
       text: `NAME/COMPANY: ${identity}\nEMAIL: ${email}\n\nPROJECT:\n${message}`,
-      // Stripped back HTML
+      // Your requested HTML structure
       html: `
-        <div style="font-family: sans-serif; line-height: 1.5; color: #111;">
-          <h2 style="border-bottom: 2px solid #dc2626; padding-bottom: 10px;">NEW PROJECT INQUIRY</h2>
-          <p><strong>NAME / COMPANY:</strong> ${identity}</p>
-          <p><strong>EMAIL:</strong> ${email}</p>
-          <div style="margin-top: 20px; padding: 15px; background: #f4f4f4; border-radius: 4px;">
+        <div style="font-family: sans-serif; line-height: 1.5;">
+          <h2>NEW PROJECT INQUIRY</h2>
+          <p>NAME / COMPANY: ${identity}</p>
+          <p>EMAIL: ${email}</p>
+          <div style="margin-top: 20px;">
             <p><strong>PROJECT DETAILS:</strong></p>
             <p style="white-space: pre-wrap;">${message}</p>
           </div>
@@ -36,12 +42,17 @@ const mailOptions = {
       `,
     };
 
-    // 3. Send email
-    await transporter.sendMail(mailOptions);
+    return await transporter.sendMail(mailOptions);
+  };
 
+  try {
+    await Donut();
     return NextResponse.json({ message: "SUCCESS" }, { status: 200 });
   } catch (error) {
     console.error("Nodemailer Error:", error);
-    return NextResponse.json({ message: "FAILED" }, { status: 500 });
+    return NextResponse.json(
+      { message: "FAILED", error: error.message }, 
+      { status: 500 }
+    );
   }
 }

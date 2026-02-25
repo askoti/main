@@ -1,28 +1,55 @@
+import StructuredData from "@/components/StructuredData";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
-  title: "Kastriot Aliu - Strategic Digital Deployment",
-  description: "Next-gen 3D experiences, high-performance architectures, and autonomous AI ecosystems. Engineered in Prishtina.",
-  keywords: ["Next.js 15", "Three.js", "AI Automation", "Full-Stack Development", "SEO Optimization"],
-  openGraph: {
-    title: "Kastriot Aliu - Strategic Digital Deployment",
-    description: "3D Spatial Design & Enterprise Automation.",
-    type: "website",
-    url: "https://kastriotaliu.com",
-    images: [
-      {
-        url: "/nammer.png", 
-        width: 1200,
-        height: 630,
-        alt: "Kastriot Aliu Portfolio Front Page",
-      },
-    ],
+  metadataBase: new URL("https://kastriotaliu.com"),
+
+  title: {
+    default: "Kastriot Aliu | Next.js Full Stack Developer",
+    template: "%s | Kastriot Aliu",
   },
+
+  description:
+    "Kastriot Aliu a Full Stack Developer specializing in Next.js, React, and high-performance SEO-optimized web applications. Building modern, scalable, and secure digital experiences.",
+
+  keywords: [
+    "Kastriot Aliu",
+    "Next.js Developer",
+    "Full Stack Developer",
+    "React Developer",
+    "Web Developer Kosovo",
+    "SEO Optimized Websites",
+    "High Performance Web Apps",
+    "JavaScript Developer",
+    "Frontend Developer",
+    "Backend Developer"
+  ],
+
+  authors: [{ name: "Kastriot Aliu" }],
+  creator: "Kastriot Aliu",
+
+  openGraph: {
+    title: "Kastriot Aliu | Next.js Full Stack Developer",
+    description:
+      "Full Stack Developer specializing in Next.js, React, SEO, and high-performance web applications.",
+    url: "https://kastriotaliu.com",
+    siteName: "Kastriot Aliu Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+
   twitter: {
     card: "summary_large_image",
-    title: "Kastriot Aliu - Strategic Digital Deployment",
-    description: "3D Spatial Design & Enterprise Automation.",
-    images: ["/nammer.png"],
+    title: "Kastriot Aliu | Next.js Developer",
+    description:
+      "Full Stack Developer building high-performance and SEO-optimized web applications.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -46,6 +73,7 @@ export default function RootLayout({ children }) {
         `}} />
       </head>
       <body className="antialiased bg-[#0f0f0f] text-white">
+        <StructuredData />
         {children}
       </body>
     </html>

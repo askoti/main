@@ -23,10 +23,6 @@ export default function Scene() {
     setMounted(true);
   }, []);
 
-  const pages = useMemo(() => 
-    (typeof window !== "undefined" && window.innerWidth < 768 ? 7.7 : 7), 
-  []);
-
   if (!mounted) return <div className="h-screen w-screen bg-[#0a0a0a]" />;
 
   return (
@@ -81,7 +77,7 @@ export default function Scene() {
             />
             
             {/* ONLY ONE Donut inside ScrollControls */}
-            <ScrollControls pages={pages} damping={0.15} distance={1}>
+            <ScrollControls pages={7} damping={0.15} distance={1}>
               <Donut />
               <Particles count={typeof window !== "undefined" && window.innerWidth < 768 ? 800 : 2000} />
               
