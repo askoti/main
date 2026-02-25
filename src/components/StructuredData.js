@@ -1,20 +1,28 @@
+import Script from "next/script";
+
 export default function StructuredData() {
   return (
-    <script
+    <Script
+      id="person-schema"
       type="application/ld+json"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
           name: "Kastriot Aliu",
-          jobTitle: "Full Stack Developer",
           url: "https://kastriotaliu.com",
-          email: "kastriootaliiu@gmail.com",
+          jobTitle: "Full Stack Developer",
+          email: "mailto:kastriootaliiu@gmail.com",
           address: {
-            "@type": "10000",
+            "@type": "PostalAddress",
             addressLocality: "Prishtina",
-            addressCountry: "Kosovo",
+            addressCountry: "XK"
           },
+          sameAs: [
+            "https://github.com/askoti",
+            "https://linkedin.com/in/kastriootaliiu"
+          ],
           knowsAbout: [
             "Next.js",
             "React",
@@ -22,8 +30,8 @@ export default function StructuredData() {
             "Node.js",
             "SEO Optimization",
             "Web Performance"
-          ],
-        }),
+          ]
+        })
       }}
     />
   );

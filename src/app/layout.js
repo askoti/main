@@ -74,6 +74,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased bg-[#0f0f0f] text-white">
         <StructuredData />
+        <Analytics />
+        <SpeedInsights />
         {children}
       </body>
     </html>

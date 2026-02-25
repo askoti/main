@@ -29,15 +29,15 @@ export default function Scene() {
     <div className="h-screen w-screen overflow-hidden relative bg-[#0a0a0a]">
       
       {/* 1. THE STUDIO GRADIENT (Placed behind the Canvas) */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#2a2a2a_0%,_#050505_100%)]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,#2a2a2a_0%,#050505_100%)]" />
       
       {/* 2. THE FILM GRAIN (Texture from your Ferrari reference) */}
-      <div className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-1 opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       {!sceneReady && <Loader />}
       
       <div 
-        className={`relative z-[2] h-full w-full transition-opacity duration-1000 ease-in-out ${
+        className={`relative z-2 h-full w-full transition-opacity duration-1000 ease-in-out ${
           sceneReady ? "opacity-100" : "opacity-0"
         }`}
       >

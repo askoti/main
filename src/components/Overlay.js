@@ -9,7 +9,7 @@ import Loader from "./Loader";
 
 // 1. Updated Section: Use 'dvh' for Safari stability
 const Section = ({ children, className = "" }) => (
-  <section className={`min-h-[100dvh] w-screen flex flex-col justify-center px-6 md:px-20 py-20 ${className}`}>
+  <section className={`min-h-dvh w-screen flex flex-col justify-center px-6 md:px-20 py-20 ${className}`}>
     {children}
   </section>
 );
@@ -70,8 +70,8 @@ export default function Portfolio() {
   return (
     <div className="h-screen w-screen bg-[#111111] overflow-hidden relative text-white">
 
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#2a2a2a_0%,_#050505_100%)]" />
-      <div className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,#2a2a2a_0%,#050505_100%)]" />
+      <div className="absolute inset-0 z-1 opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       {/* Loader */}
       {loading && <Loader />}
@@ -180,12 +180,12 @@ export default function Portfolio() {
                             { num: "03", title: "SEO Sovereignty", body: "Technical SEO optimization focused on Core Web Vitals, accessibility, and structured data. Built to improve rankings and maximize organic reach.", accent: "Dominance" }
                           ].map((service, i) => (
                             <div key={i} className="group relative bg-[#0a0a0a] p-12 border border-white/5 hover:border-red-600/40 transition-all duration-700 pointer-events-auto cursor-default overflow-hidden">
-                              <div className="absolute -inset-px bg-gradient-to-br from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                              <div className="absolute -inset-px bg-linear-to-br from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                               <span className="text-red-600/20 font-mono text-6xl font-black absolute -right-2 -top-2 group-hover:text-red-600/40 transition-colors">{service.num}</span>
                               <div className="relative z-10">
                                 <p className="text-[10px] text-red-600 font-mono mb-4 tracking-widest uppercase">// {service.accent}</p>
                                 <h4 className="text-2xl font-black uppercase text-white mb-6 group-hover:text-red-600 transition-colors italic tracking-tighter">{service.title}</h4>
-                                <div className="w-12 h-[1px] bg-white/20 mb-8 group-hover:w-24 group-hover:bg-red-600 transition-all duration-500" />
+                                <div className="w-12 h-px bg-white/20 mb-8 group-hover:w-24 group-hover:bg-red-600 transition-all duration-500" />
                                 <p className="text-gray-300 text-sm leading-relaxed font-light group-hover:text-gray-200 transition-colors">{service.body}</p>
                               </div>
                             </div>
@@ -200,7 +200,7 @@ export default function Portfolio() {
                       <div className="mb-16 flex flex-col items-center">
                         <p className="text-[10px] md:text-xs font-mono uppercase tracking-[0.4em] text-red-600 mb-4">// Architecture Philosophy</p>
                         <h3 className="text-2xl md:text-4xl font-black uppercase italic tracking-tight text-white text-center leading-tight">Precision-Selected Technologies.</h3>
-                        <div className="w-16 h-[1px] bg-red-600 my-6"></div>
+                        <div className="w-16 h-px bg-red-600 my-6"></div>
                         <p className="text-gray-300 font-mono uppercase tracking-[0.3em] text-[10px] md:text-xs text-center">No Bloat. No Shortcuts.</p>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-6 opacity-40 font-black text-xl md:text-3xl italic">
@@ -220,7 +220,7 @@ export default function Portfolio() {
                           <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight text-white/80">Clarity is authority.</h2>
                           <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight text-red-600">Execution is everything.</h2>
                         </div>
-                        <div className="w-24 h-[1px] bg-white/20 mx-auto my-16"></div>
+                        <div className="w-24 h-px bg-white/20 mx-auto my-16"></div>
                         <p className="text-gray-400 font-mono uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4">Strategic Positioning</p>
                         <h3 className="text-2xl md:text-5xl font-black uppercase italic tracking-tight leading-tight">
                           I don’t build websites.<br />
