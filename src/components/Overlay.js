@@ -146,10 +146,42 @@ export default function Portfolio() {
                       <h2 className="text-red-600 text-sm font-mono uppercase tracking-widest mb-12">— Strategic Deployments</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
                         {[
-                          { name: "Olymp BPO", tech: "SEO A+ Audit // High-End 3D Visuals", desc: "A corporate-grade digital presence engineered for authority, trust, and search visibility.", link: "https://olympbpo.com" },
-                          { name: "ASKSTORE", tech: "Full-Stack // PostgreSQL // Drag-Drop UI", desc: "A high-speed e-commerce system with a fully controlled administrative dashboard built for operational efficiency.", link: "https://askstore.vercel.app" },
-                          { name: "ASKOIN", tech: "Real-Time API // Financial Data Viz", desc: "Real-time financial data visualization platform powered by external APIs and optimized client-side rendering.", link: "https://askoin.vercel.app" },
-                          { name: "Showroom", tech: "Three.js // GLSL Shaders", desc: "An immersive 3D environment demonstrating advanced spatial UI and interactive web architecture.", link: "https://askoti.vercel.app" }
+                          { 
+                            name: "Olymp BPO", 
+                            tech: "SEO A+ Audit // High-End 3D Visuals", 
+                            desc: "A corporate-grade digital presence engineered for authority, trust, and search visibility.", 
+                            link: "https://olympbpo.com" 
+                          },
+                          { 
+                            name: "STORE", 
+                            tech: "Full-Stack // PostgreSQL // Drag-Drop UI", 
+                            desc: "A high-speed e-commerce system with a fully controlled administrative dashboard built for operational efficiency.", 
+                            link: "https://askstore.vercel.app" 
+                          },
+                          { 
+                            name: "ASKOIN", 
+                            tech: "Real-Time API // Financial Data Viz", 
+                            desc: "Real-time financial data visualization platform powered by external APIs and optimized client-side rendering.", 
+                            link: "https://askoin.vercel.app" 
+                          },
+                          { 
+                            name: "Showroom", 
+                            tech: "Three.js // GLSL Shaders", 
+                            desc: "An immersive 3D environment demonstrating advanced spatial UI and interactive web architecture.", 
+                            link: "https://askoti.vercel.app" 
+                          },
+                          { 
+                            name: "PORSCHE", 
+                            tech: "Three.js // React Three Fiber // 3D Car Experience", 
+                            desc: "A cinematic, scroll-driven 3D Porsche 911 showcase with real-time lighting, camera choreography, and performance optimization.", 
+                            link: "https://askporsche.netlify.app"  // Replace with your live deployment link
+                          },
+                          { 
+                            name: "Investment", 
+                            tech: "Next.js // Real Estate Dashboard // Financial Simulation", 
+                            desc: "Interactive 20-year real estate investment simulator with dynamic charts, market scenario toggles, and mortgage logic.", 
+                            link: "https://ask-investment.netlify.app"  // Replace with your live deployment link
+                          }
                         ].map((item, i) => (
                           <a 
                             key={i} 
