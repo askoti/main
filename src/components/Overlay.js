@@ -153,34 +153,46 @@ export default function Portfolio() {
                             link: "https://olympbpo.com" 
                           },
                           { 
+                            name: "REAL ESTATE", 
+                            tech: "Next.js 14 // Tailwind CSS // Glassmorphism", 
+                            desc: "A premium, real estate portal focused on high-end editorial aesthetics, featuring sophisticated typography and complex asymmetric grid layouts.", 
+                            link: "https://askestate.netlify.app/" 
+                          },
+                          { 
+                            name: "SMILE STUDIO", 
+                            tech: "Next.js // Framer Motion // Medical UI", 
+                            desc: "A clean, high-performance dental clinic platform designed for patient trust, featuring automated booking flows and interactive service galleries.", 
+                            link: "https://askdentist.netlify.app/"
+                          },
+                          { 
+                            name: "ROOFING", 
+                            tech: "Full-Stack // Lead Gen Architecture // PostgreSQl", 
+                            desc: "A high-utility industrial site engineered for conversion, featuring dynamic estimation tools, project portfolios, and a robust client-acquisition funnel.", 
+                            link: "https://askroof.netlify.app/"
+                          },
+                          { 
+                            name: "REAL ESTATE // 3D SPATIAL", 
+                            tech: "Three.js // React Three Fiber // WebGL", 
+                            desc: "A cutting-edge 3D real estate experience featuring interactive spatial environments, real-time lighting shaders, and seamless virtual property tours.", 
+                            link: "https://askreal.netlify.app/" 
+                          },
+                          { 
                             name: "STORE", 
                             tech: "Full-Stack // PostgreSQL // Drag-Drop UI", 
                             desc: "A high-speed e-commerce system with a fully controlled administrative dashboard built for operational efficiency.", 
                             link: "https://askstore.vercel.app" 
                           },
                           { 
-                            name: "ASKOIN", 
-                            tech: "Real-Time API // Financial Data Viz", 
-                            desc: "Real-time financial data visualization platform powered by external APIs and optimized client-side rendering.", 
-                            link: "https://askoin.vercel.app" 
+                            name: "PORSCHE", 
+                            tech: "Three.js // React Three Fiber // 3D Car Experience", 
+                            desc: "A cinematic, scroll-driven 3D Porsche 911 showcase with real-time lighting, camera choreography, and performance optimization.", 
+                            link: "https://askporsche.netlify.app"
                           },
                           { 
                             name: "Showroom", 
                             tech: "Three.js // GLSL Shaders", 
                             desc: "An immersive 3D environment demonstrating advanced spatial UI and interactive web architecture.", 
                             link: "https://askoti.vercel.app" 
-                          },
-                          { 
-                            name: "PORSCHE", 
-                            tech: "Three.js // React Three Fiber // 3D Car Experience", 
-                            desc: "A cinematic, scroll-driven 3D Porsche 911 showcase with real-time lighting, camera choreography, and performance optimization.", 
-                            link: "https://askporsche.netlify.app"  // Replace with your live deployment link
-                          },
-                          { 
-                            name: "Investment", 
-                            tech: "Next.js // Real Estate Dashboard // Financial Simulation", 
-                            desc: "Interactive 20-year real estate investment simulator with dynamic charts, market scenario toggles, and mortgage logic.", 
-                            link: "https://ask-investment.netlify.app"  // Replace with your live deployment link
                           }
                         ].map((item, i) => (
                           <a 
@@ -191,8 +203,8 @@ export default function Portfolio() {
                             className="group border-b border-white/10 pb-8 hover:border-red-600 transition-colors duration-500 pointer-events-auto cursor-pointer block"
                           >
                             <h3 className="text-3xl md:text-5xl font-black uppercase group-hover:text-red-600 transition-colors italic">{item.name}</h3>
-                            <p className="text-[10px] text-red-600 font-mono mt-2 tracking-widest uppercase">{item.tech}</p>
-                            <p className="text-gray-400 text-sm mt-4 max-w-md font-light leading-relaxed">{item.desc}</p>
+                            <p className="text-[11px] text-red-600 font-mono mt-2 tracking-widest uppercase">{item.tech}</p>
+                            <p className="text-gray-400 text-md mt-4 max-w-md font-light leading-relaxed">{item.desc}</p>
                           </a>
                         ))}
                       </div>
