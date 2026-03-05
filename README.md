@@ -276,9 +276,9 @@ I'm currently accepting **selective freelance projects** and **long-term technic
 
 ### Contact
 
-📧 **Email**: [kastriootaliu@gmail.com](mailto:kastriootaliu@gmail.com)  
+📧 **Email**: [kastriootaliu@gmail.com](mailto:kastriootaliiu@gmail.com)  
 🌐 **Website**: [kastriotaliu.com](https://kastriotaliu.com)  
-💼 **LinkedIn**: [Connect with me](https://linkedin.com/in/askoti)  
+💼 **LinkedIn**: [Connect with me](https://linkedin.com/in/kastriootaliiu)  
 🐙 **GitHub**: [@askoti](https://github.com/askoti)  
 
 ---
