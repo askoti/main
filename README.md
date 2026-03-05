@@ -16,7 +16,7 @@
 
 ## 🎯 About
 
-**Kastriot Aliu** a full-stack engineer specializing in performance optimization, conversion-driven development, and building scalable digital infrastructure. Based in Pristina with a global deployment footprint, I transform template-based websites into high-performance, custom-engineered digital ecosystems.
+**Kastriot Aliu** is a full-stack engineer specializing in performance optimization, conversion-driven development, and building scalable digital infrastructure. Based in Pristina with a global deployment footprint, I transform template-based websites into high-performance, custom-engineered digital ecosystems.
 
 ### Core Philosophy
 
@@ -31,33 +31,33 @@ I build digital infrastructure.
 
 ---
 
-## ✨ Key Capabilities
+## Key Capabilities
 
-### 🚀 **Performance & Conversion Engineering**
+### Performance & Conversion Engineering
 - Transform legacy WordPress/Wix sites into Next.js architectures
 - 60%+ performance improvements (Core Web Vitals optimization)
 - Conversion-focused design & UX patterns
 - SEO sovereignty through technical excellence
 
-### 🎨 **3D Interactive Experiences**
+### 3D Interactive Experiences
 - Three.js spatial environments and animations
 - Real-time 3D visualizations
 - Interactive product showcases
 - Immersive web experiences that engage users
 
-### 🏗️ **Strategic Deployments**
+### Strategic Deployments
 - Full-stack project architecture and execution
 - API integration and automation
 - Custom backend solutions (Django, PostgreSQL)
 - Production-grade deployment pipelines
 
-### 🤖 **Advanced Automation**
+### Advanced Automation
 - Custom API workflows using NBN & AI
 - Lead capture to CRM synchronization
 - Automated estimation tools and dynamic configurators
 - Logic automation to eliminate manual bottlenecks
 
-### 🎯 **SEO & Technical Authority**
+### SEO & Technical Authority
 - Core Web Vitals optimization
 - Structured data & semantic HTML
 - Organic reach maximization
@@ -65,7 +65,7 @@ I build digital infrastructure.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technologies |
 |----------|--------------|
@@ -82,9 +82,9 @@ I build digital infrastructure.
 
 ---
 
-## 📋 Strategic Deployments
+## Strategic Deployments
 
-### 🏢 **OLYMP BPO**
+### OLYMP BPO
 **SEO Audit • High-End 3D Visuals**
 
 A corporate-grade digital presence engineered for authority, trust, and search visibility. Features sophisticated 3D visualizations and optimized information architecture.
@@ -95,7 +95,7 @@ A corporate-grade digital presence engineered for authority, trust, and search v
 
 ---
 
-### 🏠 **Real Estate Portal**
+### Real Estate Portal
 **Premium Editorial • Sophisticated Typography • Glassmorphism**
 
 A cutting-edge real estate experience featuring advanced grid layouts, premium typography, and modern UI patterns. Designed for high-value property showcases.
@@ -106,7 +106,7 @@ A cutting-edge real estate experience featuring advanced grid layouts, premium t
 
 ---
 
-### 😁 **Smile Studio**
+### Smile Studio
 **Clean Performance • FRAMER Motion • Next.js • Medical UI**
 
 A high-performance dental clinic platform designed for patient trust and automated booking flows. Features smooth animations and intuitive navigation.
@@ -117,7 +117,7 @@ A high-performance dental clinic platform designed for patient trust and automat
 
 ---
 
-### 🏗️ **Roofing Co.**
+### Roofing Co.
 **High-Utility Industrial Site • Lead-Gen Architecture • PostgreSQL**
 
 A conversion-focused industrial site engineered for lead acquisition. Features dynamic estimation tools, project portfolios, and robust client-acquisition funnels.
@@ -128,7 +128,7 @@ A conversion-focused industrial site engineered for lead acquisition. Features d
 
 ---
 
-### 🏡 **Real Estate 3D Spatial**
+### Real Estate 3D Spatial
 **Three.js • React • Vercel • VR-Ready Interactive Tours**
 
 A cutting-edge 3D real estate experience featuring interactive spatial environments, real-time lighting, and seamless virtual property tours.
@@ -139,7 +139,7 @@ A cutting-edge 3D real estate experience featuring interactive spatial environme
 
 ---
 
-### 🛍️ **E-Commerce Store**
+### E-Commerce Store
 **Full-Stack • PostgreSQL • Drag-Drop UI**
 
 A high-speed e-commerce system with fully controlled administrative dashboard. Built for operational efficiency and seamless customer experience.
@@ -150,7 +150,7 @@ A high-speed e-commerce system with fully controlled administrative dashboard. B
 
 ---
 
-### 🏎️ **Porsche Showroom**
+### Porsche Showroom (Coming Soon)
 **3D Configurator • Real-time Visualization • Premium Experience**
 
 A next-generation automotive showroom featuring interactive 3D car configurators and real-time material/color visualization.
@@ -161,7 +161,7 @@ A next-generation automotive showroom featuring interactive 3D car configurators
 
 ---
 
-## 🔧 Exclusive Solutions
+## Exclusive Solutions
 
 ### 01 – Digital Translation
 Migration of legacy WordPress or Wix systems into modern, performance-first architectures. Reduced load times, improved security, and long-term scalability.
@@ -174,7 +174,7 @@ Technical SEO optimization focused on Core Web Vitals, accessibility, and struct
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -216,7 +216,7 @@ vercel deploy --prod
 
 ---
 
-## 💻 Technical Highlights
+## Technical Highlights
 
 ✅ **Next.js 15+ App Router** with Server & Client Components  
 ✅ **Three.js 3D Graphics** for immersive experiences  
@@ -230,7 +230,7 @@ vercel deploy --prod
 
 ---
 
-## 📊 Performance
+## Performance
 
 - **Lighthouse Score**: 90+
 - **Core Web Vitals**: All Green
@@ -240,7 +240,7 @@ vercel deploy --prod
 
 ---
 
-## 🎨 Design Philosophy
+## Design Philosophy
 
 - **Modern Aesthetic**: Clean, professional, bold typography
 - **3D Integration**: Cutting-edge Three.js animations
@@ -251,7 +251,7 @@ vercel deploy --prod
 
 ---
 
-## 🔮 What's Next
+## What's Next
 
 - [ ] Porsche 3D configurator showcase
 - [ ] Advanced AI-powered automation demos
@@ -263,7 +263,7 @@ vercel deploy --prod
 
 ---
 
-## 📞 Let's Work Together
+## Let's Work Together
 
 I'm currently accepting **selective freelance projects** and **long-term technical partnerships**.
 
@@ -276,20 +276,17 @@ I'm currently accepting **selective freelance projects** and **long-term technic
 
 ### Contact
 
-📧 **Email**: [kastriootaliu@gmail.com](mailto:kastriootaliiu@gmail.com)  
-🌐 **Website**: [kastriotaliu.com](https://kastriotaliu.com)  
-💼 **LinkedIn**: [Connect with me](https://linkedin.com/in/kastriootaliiu)  
-🐙 **GitHub**: [@askoti](https://github.com/askoti)  
+Email: kastriootaliu@gmail.com
 
 ---
 
-## 📄 License
+## License
 
 This portfolio is a showcase of my work. For inquiries about code usage or partnerships, please reach out directly.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Next.js Team** for an incredible framework
 - **Three.js Community** for advanced 3D capabilities
