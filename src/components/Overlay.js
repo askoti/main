@@ -189,10 +189,10 @@ export default function Portfolio() {
                             link: "https://askporsche.netlify.app"
                           },
                           { 
-                            name: "Showroom", 
-                            tech: "Three.js // GLSL Shaders", 
-                            desc: "An immersive 3D environment demonstrating advanced spatial UI and interactive web architecture.", 
-                            link: "https://askoti.vercel.app" 
+                            name: "ASKCAR", 
+                            tech: "React Native // JSON Data Layer // Expo Go", 
+                            desc: "A premium car marketplace mobile app featuring live search, advanced filters, wishlist state management, and full vehicle detail pages — all driven from a local JSON file.", 
+                            link: "https://askca.netlify.app" 
                           }
                         ].map((item, i) => (
                           <a 
