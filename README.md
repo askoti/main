@@ -18,17 +18,6 @@
 
 **Kastriot Aliu** is a full-stack engineer specializing in performance optimization, conversion-driven development, and building scalable digital infrastructure. Based in Pristina with a global deployment footprint, I transform template-based websites into high-performance, custom-engineered digital ecosystems.
 
-### Core Philosophy
-
-```
-Speed is Leverage.
-Clarity is Authority.
-Execution is Everything.
-
-I don't build websites.
-I build digital infrastructure.
-```
-
 ---
 
 ## Key Capabilities
