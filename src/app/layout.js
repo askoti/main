@@ -12,44 +12,80 @@ export const metadata = {
   },
 
   description:
-    "Kastriot Aliu a Full Stack Developer specializing in Next.js, React, and high-performance SEO-optimized web applications. Building modern, scalable, and secure digital experiences.",
+    "Full Stack Developer specializing in Next.js, React Native, and PostgreSQL. Crafting high-performance, minimalist web and mobile applications with a focus on SEO and scalability.",
 
   keywords: [
     "Kastriot Aliu",
     "Next.js Developer",
-    "Full Stack Developer",
-    "React Developer",
+    "React Native Developer", // Added
+    "Full Stack Engineer",
+    "PostgreSQL Expert", // Added
+    "Mobile App Developer", // Added
     "Web Developer Kosovo",
-    "SEO Optimized Websites",
+    "Tirana Developer", // Added for local reach
+    "SEO Strategy",
     "High Performance Web Apps",
-    "JavaScript Developer",
-    "Frontend Developer",
-    "Backend Developer"
+    "Scalable SaaS Architecture", // Added
+    "Tailwind CSS Specialist" // Added
   ],
 
-  authors: [{ name: "Kastriot Aliu" }],
+  authors: [{ name: "Kastriot Aliu", url: "https://kastriotaliu.com" }],
   creator: "Kastriot Aliu",
+  publisher: "Kastriot Aliu", // Added
+
+  // Important for SEO: tells Google which version is the primary one
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en-US",
+      "de-DE": "/de-DE",
+    },
+  },
 
   openGraph: {
     title: "Kastriot Aliu | Next.js Full Stack Developer",
     description:
-      "Full Stack Developer specializing in Next.js, React, SEO, and high-performance web applications.",
+      "Expert in Next.js and React Native. Building the future of high-performance digital products.",
     url: "https://kastriotaliu.com",
-    siteName: "Kastriot Aliu Portfolio",
+    siteName: "Kastriot Aliu",
     locale: "en_US",
-    type: "website",
+    type: "profile", // Changed from website to profile
+    firstName: "Kastriot",
+    lastName: "Aliu",
+    username: "kastriotaliu",
+    images: [
+      {
+        url: "/og-image.png", // Make sure to add this file to your public folder
+        width: 1200,
+        height: 630,
+        alt: "Kastriot Aliu Portfolio Preview",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Kastriot Aliu | Next.js Developer",
-    description:
-      "Full Stack Developer building high-performance and SEO-optimized web applications.",
+    title: "Kastriot Aliu | Next.js & React Native Developer",
+    description: "Building high-performance web and mobile applications.",
+    creator: "@your_twitter_handle", // Add your handle if you have one
+    images: ["/og-image.png"],
   },
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  // Verification for Google Search Console
+  verification: {
+    google: "KSDN8IZ4r43uy8e7noJp-DTFwnfHDoWnCeVAZx8QrR0", // Add your code here
   },
 };
 

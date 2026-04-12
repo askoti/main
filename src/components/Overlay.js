@@ -116,7 +116,7 @@ export default function Portfolio() {
                           KASTRIOT<br /><span className="text-red-600 text-[0.8em]">ALIU</span>
                         </h1>
                         <p className="text-gray-300 font-mono tracking-widest uppercase mt-6 text-[10px] md:text-lg border-t border-white/10 pt-4 inline-block">
-                          Full-Stack Engineer Performance & Conversion Specialist
+                          Full-Stack Developer // Performance & Conversion Specialist
                         </p>
                       </div>
                     </Section>
