@@ -1,49 +1,65 @@
-// "use client"
-import { motion, useReducedMotion } from "framer-motion";
+"use client";
+import { useEffect, useState } from "react";
 
 export default function Loader({ loading = true }) {
-  const prefersReducedMotion = useReducedMotion();
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (!loading) {
+      // Wait for fade-out to complete before unmounting
+      const t = setTimeout(() => setVisible(false), 600);
+      return () => clearTimeout(t);
+    }
+  }, [loading]);
+
+  if (!visible) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-100 flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out ${
-        loading ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      } bg-[radial-gradient(circle_at_center,#1a1a1a_0%,#0a0a0a_100%)]`}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[radial-gradient(circle_at_center,#1a1a1a_0%,#0a0a0a_100%)]"
+      style={{
+        opacity: loading ? 1 : 0,
+        transition: "opacity 0.6s ease-in-out",
+        pointerEvents: loading ? "auto" : "none",
+      }}
     >
-      {/* Inner content */}
-      <div className="relative flex flex-col items-center">
-        <div className="relative h-px w-48 overflow-hidden bg-white/5">
-          {!prefersReducedMotion && loading && (
-            <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: "100%" }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.2, // Slightly faster to feel high-performance
-                ease: "easeInOut",
-              }}
-              className="absolute h-full w-full bg-linear-to-r from-transparent via-red-600 to-transparent"
-            />
-          )}
-        </div>
+      {/* Progress bar */}
+      <div className="relative h-px w-48 overflow-hidden bg-white/5">
+        <div className="loader-bar absolute h-full w-full bg-gradient-to-r from-transparent via-red-600 to-transparent" />
       </div>
 
-      {/* Luxury corner accents - Matches the "Infrastructure" vibe */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.1, duration: 0.8 }}
-        className="absolute top-12 left-12 h-6 w-6 border-t border-l border-red-600/20" 
-      />
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.1, duration: 0.8 }}
-        className="absolute bottom-12 right-12 h-6 w-6 border-b border-r border-red-600/20" 
+      {/* Corner accents */}
+      <div className="absolute top-12 left-12 h-6 w-6 border-t border-l border-red-600/20 loader-corner" />
+      <div className="absolute bottom-12 right-12 h-6 w-6 border-b border-r border-red-600/20 loader-corner" />
+
+      {/* Scanline texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          backgroundImage: `linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.1) 50%), linear-gradient(90deg, rgba(255,0,0,0.02), rgba(0,255,0,0), rgba(0,0,255,0.02))`,
+          backgroundSize: "100% 2px, 3px 100%",
+        }}
       />
 
-      {/* Subtle Scanline Overlay for texture */}
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0),rgba(0,0,255,0.02))] bg-size-[100%_2px,3px_100%]" />
+      <style>{`
+        @media (prefers-reduced-motion: no-preference) {
+          .loader-bar {
+            animation: scan 1.2s ease-in-out infinite;
+          }
+          .loader-corner {
+            animation: fadeCorner 0.8s ease-out 0.1s both;
+          }
+        }
+
+        @keyframes scan {
+          from { transform: translateX(-100%); }
+          to   { transform: translateX(100%); }
+        }
+
+        @keyframes fadeCorner {
+          from { opacity: 0; transform: scale(0.8); }
+          to   { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
     </div>
   );
 }

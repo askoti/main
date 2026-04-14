@@ -33,7 +33,7 @@ export default function Particles({ count = 1000 }) {
   });
 
   return (
-    <points ref={pointsRef} frustumCulled={false}>
+    <points ref={pointsRef} frustumCulled={true}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"

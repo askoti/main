@@ -11,7 +11,7 @@ function DonutContent() {
 
   // 1. Geometry is perfectly memoized—won't lag on re-renders
   const geometry = useMemo(() => 
-    new THREE.TorusKnotGeometry(0.8, 0.1, 528, 16, 3, 14), 
+  new THREE.TorusKnotGeometry(0.8, 0.1, 256, 12, 3, 14), 
   []);
 
   // 2. Scale Logic: Perfectly responsive
@@ -24,6 +24,7 @@ function DonutContent() {
 
   useFrame((state) => {
     if (!meshRef.current) return;
+    if (document.hidden) return;
 
     const offset = scroll.offset;
     const time = state.clock.getElapsedTime();

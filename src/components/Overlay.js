@@ -33,8 +33,8 @@ export default function Portfolio() {
     setMounted(true);
     const timer = setTimeout(() => {
       setLoading(false);
-      setTimeout(calculatePages, 150);
-    }, 800);
+      setTimeout(calculatePages, 50); // reduced
+    }, 200);
 
     window.addEventListener("resize", calculatePages);
     return () => {
@@ -71,10 +71,12 @@ export default function Portfolio() {
     <div className="h-screen w-screen bg-[#111111] overflow-hidden relative text-white">
 
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,#2a2a2a_0%,#050505_100%)]" />
-      <div className="absolute inset-0 z-1 opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-1 opacity-[0.04] pointer-events-none" 
+       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} 
+      />
 
       {/* Loader */}
-      {loading && <Loader />}
+      <Loader loading={loading} />
 
       {/* 3D Canvas */}
       {mounted && (
@@ -101,7 +103,7 @@ export default function Portfolio() {
 
               <ScrollControls pages={pages} damping={0.15} eps={0.0001}>
                 <Donut />
-                <Particles count={typeof window !== "undefined" && window.innerWidth < 768 ? 1000 : 2000} />
+                <Particles count={typeof window !== "undefined" && window.innerWidth < 768 ? 800 : 1200} />
 
                 <Scroll html className="pointer-events-none">
                   <div ref={scrollContentRef} className="w-screen flex flex-col">

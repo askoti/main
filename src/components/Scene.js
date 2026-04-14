@@ -55,11 +55,9 @@ export default function Scene() {
             // This is the magic line that fixes the flat black background
             gl.setClearAlpha(0); 
           }}
-          dpr={[1, 2]} 
+          dpr={[1, 1.5]} 
         >
           <Suspense fallback={null}>
-            {/* High-End Environment for Metallic Shine */}
-            <Environment preset="city" intensity={0.8} />
             <ambientLight intensity={0.3} /> 
             
             {/* Aggressive Red Lighting */}
