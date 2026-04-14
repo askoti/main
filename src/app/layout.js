@@ -1,7 +1,5 @@
 import StructuredData from "@/components/StructuredData";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   metadataBase: new URL("https://kastriotaliu.com"),
@@ -82,7 +80,6 @@ export const metadata = {
 export const viewport = {
   themeColor: "#0f0f0f",
   colorScheme: "dark",
-  // ADD: prevents zoom on input focus on iOS — better mobile UX
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -92,8 +89,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark" style={{ backgroundColor: "#0f0f0f" }}>
       <head>
-        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
-        
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -110,8 +105,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased bg-[#0f0f0f] text-white">
         <StructuredData />
-        <Analytics />
-        <SpeedInsights />
         {children}
       </body>
     </html>
