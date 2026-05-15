@@ -1,15 +1,18 @@
 "use client";
 
-import { useState, useEffect, useMemo, Suspense, useRef, useCallback } from "react";
+import { useState, useEffect, Suspense, useRef, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll } from "@react-three/drei";
 import Donut from "./Donut";
 import Particles from "./Particles";
 import Loader from "./Loader";
+import ProjectCarousel from "./ProjectCarousel";
 
-// 1. Updated Section: Use 'dvh' for Safari stability
 const Section = ({ children, className = "" }) => (
-  <section className={`min-h-dvh w-screen flex flex-col justify-center px-6 md:px-20 py-20 ${className}`}>
+  <section
+    className={`w-screen flex flex-col justify-center px-6 md:px-20 py-20 ${className}`}
+    style={{ minHeight: "100svh" }}
+  >
     {children}
   </section>
 );
@@ -17,15 +20,19 @@ const Section = ({ children, className = "" }) => (
 export default function Portfolio() {
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [pages, setPages] = useState(7); 
+  const [pages, setPages] = useState(7);
   const scrollContentRef = useRef(null);
 
-  // 2. Dynamic Scroll Calculation Logic
   const calculatePages = useCallback(() => {
     if (scrollContentRef.current) {
       const contentHeight = scrollContentRef.current.scrollHeight;
-      const viewportHeight = window.innerHeight;
-      setPages(contentHeight / viewportHeight);
+      // Use visualViewport for Safari mobile accuracy, fallback to innerHeight
+      const viewportHeight = window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+      // Subtract a small buffer to prevent extra blank space
+      const calculated = contentHeight / viewportHeight;
+      setPages(Math.max(1, calculated - 0.1));
     }
   }, []);
 
@@ -33,17 +40,25 @@ export default function Portfolio() {
     setMounted(true);
     const timer = setTimeout(() => {
       setLoading(false);
-      setTimeout(calculatePages, 50); // reduced
+      setTimeout(calculatePages, 100);
     }, 200);
 
     window.addEventListener("resize", calculatePages);
+
+    // Safari mobile: recalculate when visual viewport changes (URL bar show/hide)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", calculatePages);
+    }
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener("resize", calculatePages);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", calculatePages);
+      }
     };
   }, [calculatePages]);
 
-  // Contact form state
   const [formData, setFormData] = useState({ identity: "", email: "", message: "" });
   const [status, setStatus] = useState("IDLE");
 
@@ -71,14 +86,15 @@ export default function Portfolio() {
     <div className="h-screen w-screen bg-[#111111] overflow-hidden relative text-white">
 
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,#2a2a2a_0%,#050505_100%)]" />
-      <div className="absolute inset-0 z-1 opacity-[0.04] pointer-events-none" 
-       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} 
+      <div
+        className="absolute inset-0 z-1 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
       />
 
-      {/* Loader */}
       <Loader loading={loading} />
 
-      {/* 3D Canvas */}
       {mounted && (
         <div className={`h-full w-full transition-opacity duration-1000 ${loading ? "opacity-0" : "opacity-100"}`}>
           <Canvas
@@ -88,7 +104,6 @@ export default function Portfolio() {
             dpr={[1, 1.5]}
           >
             <Suspense fallback={null}>
-              {/* PRO LIGHTING RIG FOR DONUT */}
               <ambientLight intensity={0.2} />
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#D40000" />
               <pointLight position={[-5, 5, -5]} intensity={1.5} color="#ffffff" />
@@ -132,83 +147,29 @@ export default function Portfolio() {
                       </h1>
                       <div className="max-w-2xl mt-8 space-y-6 text-gray-300 font-light text-base md:text-xl leading-relaxed">
                         <p>
-                          Since 2019, I have specialized in transforming template-based websites into 
-                          <span className="text-white font-medium"> high-performance digital infrastructure.</span> 
+                          Since 2019, I have specialized in transforming template-based websites into
+                          <span className="text-white font-medium"> high-performance digital infrastructure.</span>
                         </p>
                         <p>
                           While most businesses rely on bloated page builders, I engineer custom <span className="text-white font-medium">Next.js ecosystems</span>. Built for speed, scalability, and long-term growth.
                           <br />My work focuses on three pillars: Performance. Visibility. Control.
-                          <br />You’re not just hiring a developer. You’re investing in a scalable digital asset.
+                          <br />You're not just hiring a developer. You're investing in a scalable digital asset.
                         </p>
                       </div>
                     </Section>
 
-                    {/* 3. PROJECTS */}
-                    <Section>
-                      <h2 className="text-red-600 text-sm font-mono uppercase tracking-widest mb-12">— Strategic Deployments</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-                        {[
-                          { 
-                            name: "Olymp BPO", 
-                            tech: "SEO A+ Audit // High-End 3D Visuals", 
-                            desc: "A corporate-grade digital presence engineered for authority, trust, and search visibility.", 
-                            link: "https://olympbpo.com" 
-                          },
-                          { 
-                            name: "REAL ESTATE", 
-                            tech: "Next.js 14 // Tailwind CSS // Glassmorphism", 
-                            desc: "A premium, real estate portal focused on high-end editorial aesthetics, featuring sophisticated typography and complex asymmetric grid layouts.", 
-                            link: "https://askestate.netlify.app/" 
-                          },
-                          { 
-                            name: "SMILE STUDIO", 
-                            tech: "Next.js // Framer Motion // Medical UI", 
-                            desc: "A clean, high-performance dental clinic platform designed for patient trust, featuring automated booking flows and interactive service galleries.", 
-                            link: "https://askdentist.netlify.app/"
-                          },
-                          { 
-                            name: "ROOFING", 
-                            tech: "Full-Stack // Lead Gen Architecture // PostgreSQl", 
-                            desc: "A high-utility industrial site engineered for conversion, featuring dynamic estimation tools, project portfolios, and a robust client-acquisition funnel.", 
-                            link: "https://askroof.netlify.app/"
-                          },
-                          { 
-                            name: "REAL ESTATE // 3D SPATIAL", 
-                            tech: "Three.js // React Three Fiber // WebGL", 
-                            desc: "A cutting-edge 3D real estate experience featuring interactive spatial environments, real-time lighting shaders, and seamless virtual property tours.", 
-                            link: "https://askreal.netlify.app/" 
-                          },
-                          { 
-                            name: "STORE", 
-                            tech: "Full-Stack // PostgreSQL // Drag-Drop UI", 
-                            desc: "A high-speed e-commerce system with a fully controlled administrative dashboard built for operational efficiency.", 
-                            link: "https://askstore.vercel.app" 
-                          },
-                          { 
-                            name: "PORSCHE", 
-                            tech: "Three.js // React Three Fiber // 3D Car Experience", 
-                            desc: "A cinematic, scroll-driven 3D Porsche 911 showcase with real-time lighting, camera choreography, and performance optimization.", 
-                            link: "https://askporsche.netlify.app"
-                          },
-                          { 
-                            name: "ASKCAR", 
-                            tech: "React Native // JSON Data Layer // Expo Go", 
-                            desc: "A premium car marketplace mobile app featuring live search, advanced filters, wishlist state management, and full vehicle detail pages — all driven from a local JSON file.", 
-                            link: "https://askca.netlify.app" 
-                          }
-                        ].map((item, i) => (
-                          <a 
-                            key={i} 
-                            href={item.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="group border-b border-white/10 pb-8 hover:border-red-600 transition-colors duration-500 pointer-events-auto cursor-pointer block"
-                          >
-                            <h3 className="text-3xl md:text-5xl font-black uppercase group-hover:text-red-600 transition-colors italic">{item.name}</h3>
-                            <p className="text-[11px] text-red-600 font-mono mt-2 tracking-widest uppercase">{item.tech}</p>
-                            <p className="text-gray-400 text-md mt-4 max-w-md font-light leading-relaxed">{item.desc}</p>
-                          </a>
-                        ))}
+                    {/* 3. PROJECTS — 3D CAROUSEL */}
+                    <Section className="items-center !px-0">
+                      <div className="w-full">
+                        <div className="px-6 md:px-20 mb-8 md:mb-12">
+                          <h2 className="text-red-600 text-sm font-mono uppercase tracking-widest mb-4">— Strategic Deployments</h2>
+                          <p className="text-white/40 text-[10px] font-mono uppercase tracking-widest">
+                            Swipe to explore // Tap to launch
+                          </p>
+                        </div>
+                        <div className="pointer-events-auto">
+                          <ProjectCarousel />
+                        </div>
                       </div>
                     </Section>
 
@@ -221,18 +182,44 @@ export default function Portfolio() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
                           {[
-                            { num: "01", title: "Digital Translation", body: "Migration of legacy WordPress or Wix systems into modern, performance-first architectures. Reduced load times, improved security, and long-term scalability.", accent: "Architecture" },
-                            { num: "02", title: "Logic & Automation", body: "Custom automation systems using APIs, N8N, and AI workflows. From lead capture to CRM synchronization, I eliminate manual bottlenecks.", accent: "Intelligence" },
-                            { num: "03", title: "SEO Sovereignty", body: "Technical SEO optimization focused on Core Web Vitals, accessibility, and structured data. Built to improve rankings and maximize organic reach.", accent: "Dominance" }
+                            {
+                              num: "01",
+                              title: "Digital Translation",
+                              body: "Migration of legacy WordPress or Wix systems into modern, performance-first architectures. Reduced load times, improved security, and long-term scalability.",
+                              accent: "Architecture",
+                            },
+                            {
+                              num: "02",
+                              title: "Logic & Automation",
+                              body: "Custom automation systems using APIs, N8N, and AI workflows. From lead capture to CRM synchronization, I eliminate manual bottlenecks.",
+                              accent: "Intelligence",
+                            },
+                            {
+                              num: "03",
+                              title: "SEO Sovereignty",
+                              body: "Technical SEO optimization focused on Core Web Vitals, accessibility, and structured data. Built to improve rankings and maximize organic reach.",
+                              accent: "Dominance",
+                            },
                           ].map((service, i) => (
-                            <div key={i} className="group relative bg-[#0a0a0a] p-12 border border-white/5 hover:border-red-600/40 transition-all duration-700 pointer-events-auto cursor-default overflow-hidden">
+                            <div
+                              key={i}
+                              className="group relative bg-[#0a0a0a] p-12 border border-white/5 hover:border-red-600/40 transition-all duration-700 pointer-events-auto cursor-default overflow-hidden"
+                            >
                               <div className="absolute -inset-px bg-linear-to-br from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                              <span className="text-red-600/20 font-mono text-6xl font-black absolute -right-2 -top-2 group-hover:text-red-600/40 transition-colors">{service.num}</span>
+                              <span className="text-red-600/20 font-mono text-6xl font-black absolute -right-2 -top-2 group-hover:text-red-600/40 transition-colors">
+                                {service.num}
+                              </span>
                               <div className="relative z-10">
-                                <p className="text-[10px] text-red-600 font-mono mb-4 tracking-widest uppercase">// {service.accent}</p>
-                                <h4 className="text-2xl font-black uppercase text-white mb-6 group-hover:text-red-600 transition-colors italic tracking-tighter">{service.title}</h4>
+                                <p className="text-[10px] text-red-600 font-mono mb-4 tracking-widest uppercase">
+                                  // {service.accent}
+                                </p>
+                                <h4 className="text-2xl font-black uppercase text-white mb-6 group-hover:text-red-600 transition-colors italic tracking-tighter">
+                                  {service.title}
+                                </h4>
                                 <div className="w-12 h-px bg-white/20 mb-8 group-hover:w-24 group-hover:bg-red-600 transition-all duration-500" />
-                                <p className="text-gray-300 text-sm leading-relaxed font-light group-hover:text-gray-200 transition-colors">{service.body}</p>
+                                <p className="text-gray-300 text-sm leading-relaxed font-light group-hover:text-gray-200 transition-colors">
+                                  {service.body}
+                                </p>
                               </div>
                             </div>
                           ))}
@@ -244,13 +231,19 @@ export default function Portfolio() {
                     <Section className="text-center">
                       <h2 className="text-red-600 text-sm font-mono uppercase tracking-widest mb-12">— The Tech Stack</h2>
                       <div className="mb-16 flex flex-col items-center">
-                        <p className="text-[10px] md:text-xs font-mono uppercase tracking-[0.4em] text-red-600 mb-4">// Architecture Philosophy</p>
-                        <h3 className="text-2xl md:text-4xl font-black uppercase italic tracking-tight text-white text-center leading-tight">Precision-Selected Technologies.</h3>
+                        <p className="text-[10px] md:text-xs font-mono uppercase tracking-[0.4em] text-red-600 mb-4">
+                          // Architecture Philosophy
+                        </p>
+                        <h3 className="text-2xl md:text-4xl font-black uppercase italic tracking-tight text-white text-center leading-tight">
+                          Precision-Selected Technologies.
+                        </h3>
                         <div className="w-16 h-px bg-red-600 my-6"></div>
-                        <p className="text-gray-300 font-mono uppercase tracking-[0.3em] text-[10px] md:text-xs text-center">No Bloat. No Shortcuts.</p>
+                        <p className="text-gray-300 font-mono uppercase tracking-[0.3em] text-[10px] md:text-xs text-center">
+                          No Bloat. No Shortcuts.
+                        </p>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-6 opacity-40 font-black text-xl md:text-3xl italic">
-                        <span>NEXT.JS 15</span> <span>TYPESCRIPT</span> <span>PYTHON</span> 
+                        <span>NEXT.JS 15</span> <span>TYPESCRIPT</span> <span>PYTHON</span>
                         <span>DJANGO</span> <span>POSTGRESQL</span> <span>THREE.JS</span>
                         <span>BLENDER</span> <span>N8N AI</span> <span>TAILWIND</span>
                         <span>REACT NATIVE</span> <span>MONGODB</span> <span>GIT/GITHUB</span>
@@ -260,16 +253,26 @@ export default function Portfolio() {
                     {/* 6. PHILOSOPHY */}
                     <Section className="items-center text-center">
                       <div className="max-w-4xl">
-                        <p className="text-red-600 text-[10px] md:text-xs font-mono uppercase tracking-[0.4em] mb-12">— Operational Philosophy</p>
+                        <p className="text-red-600 text-[10px] md:text-xs font-mono uppercase tracking-[0.4em] mb-12">
+                          — Operational Philosophy
+                        </p>
                         <div className="space-y-6 md:space-y-8">
-                          <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight">Speed is leverage.</h2>
-                          <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight text-white/80">Clarity is authority.</h2>
-                          <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight text-red-600">Execution is everything.</h2>
+                          <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight">
+                            Speed is leverage.
+                          </h2>
+                          <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight text-white/80">
+                            Clarity is authority.
+                          </h2>
+                          <h2 className="text-3xl md:text-6xl font-black uppercase italic leading-tight tracking-tight text-red-600">
+                            Execution is everything.
+                          </h2>
                         </div>
                         <div className="w-24 h-px bg-white/20 mx-auto my-16"></div>
-                        <p className="text-gray-400 font-mono uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4">Strategic Positioning</p>
+                        <p className="text-gray-400 font-mono uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4">
+                          Strategic Positioning
+                        </p>
                         <h3 className="text-2xl md:text-5xl font-black uppercase italic tracking-tight leading-tight">
-                          I don’t build websites.<br />
+                          I don't build websites.<br />
                           <span className="text-red-600">I build digital infrastructure.</span>
                         </h3>
                       </div>
@@ -279,27 +282,74 @@ export default function Portfolio() {
                     <Section>
                       <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-20">
                         <div>
-                          <h1 className="text-5xl md:text-7xl font-black uppercase mb-8 leading-none">INITIATE<br /><span className="text-red-600">STRATEGY</span></h1>
+                          <h1 className="text-5xl md:text-7xl font-black uppercase mb-8 leading-none">
+                            INITIATE<br /><span className="text-red-600">STRATEGY</span>
+                          </h1>
                           <p className="text-gray-300 mb-10 max-w-md font-light leading-relaxed">
                             Based in Prishtina. Deploying worldwide. Currently accepting selective freelance projects and long-term technical partnerships.
                           </p>
                           <div className="space-y-4 font-mono text-sm uppercase">
-                            <a href="mailto:kastriootaliiu@gmail.com" className="block text-red-600 hover:text-white transition-colors border-b border-red-600/20 pb-2 w-fit italic pointer-events-auto">kastriootaliiu@gmail.com</a>
+                            <a
+                              href="mailto:kastriootaliiu@gmail.com"
+                              className="block text-red-600 hover:text-white transition-colors border-b border-red-600/20 pb-2 w-fit italic pointer-events-auto"
+                            >
+                              kastriootaliiu@gmail.com
+                            </a>
                             <div className="flex gap-8 items-center pointer-events-auto">
-                              <a href="https://github.com/askoti" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest">GitHub</a>
-                              <a href="https://linkedin.com/in/kastriootaliiu" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest">LinkedIn</a>
+                              <a
+                                href="https://github.com/askoti"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest"
+                              >
+                                GitHub
+                              </a>
+                              <a
+                                href="https://linkedin.com/in/kastriootaliiu"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest"
+                              >
+                                LinkedIn
+                              </a>
                             </div>
                           </div>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-6 bg-black/40 p-10 backdrop-blur-xl border border-white/10 relative overflow-hidden pointer-events-auto">
+                        <form
+                          onSubmit={handleSubmit}
+                          className="flex flex-col gap-6 bg-black/40 p-10 backdrop-blur-xl border border-white/10 relative overflow-hidden pointer-events-auto"
+                        >
                           <div className="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
                           <div className="space-y-6">
-                            <input required type="text" placeholder="NAME / COMPANY" value={formData.identity} onChange={e => setFormData(f => ({ ...f, identity: e.target.value }))} className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors text-[12px] tracking-widest uppercase font-mono" />
-                            <input required type="email" placeholder="EMAIL" value={formData.email} onChange={e => setFormData(f => ({ ...f, email: e.target.value }))} className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors text-[12px] tracking-widest uppercase font-mono" />
-                            <textarea required placeholder="YOUR PROJECT" value={formData.message} onChange={e => setFormData(f => ({ ...f, message: e.target.value }))} className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors h-32 text-[12px] tracking-widest uppercase font-mono resize-none" />
+                            <input
+                              required
+                              type="text"
+                              placeholder="NAME / COMPANY"
+                              value={formData.identity}
+                              onChange={(e) => setFormData((f) => ({ ...f, identity: e.target.value }))}
+                              className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors text-[12px] tracking-widest uppercase font-mono"
+                            />
+                            <input
+                              required
+                              type="email"
+                              placeholder="EMAIL"
+                              value={formData.email}
+                              onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
+                              className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors text-[12px] tracking-widest uppercase font-mono"
+                            />
+                            <textarea
+                              required
+                              placeholder="YOUR PROJECT"
+                              value={formData.message}
+                              onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))}
+                              className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors h-32 text-[12px] tracking-widest uppercase font-mono resize-none"
+                            />
                           </div>
-                          <button disabled={status === "SENDING"} className="bg-red-600 text-white font-black py-5 uppercase tracking-[0.3em] hover:bg-white hover:text-red-600 transition-all text-xs shadow-lg shadow-red-600/20 disabled:bg-gray-800 disabled:text-gray-500">
+                          <button
+                            disabled={status === "SENDING"}
+                            className="bg-red-600 text-white font-black py-5 uppercase tracking-[0.3em] hover:bg-white hover:text-red-600 transition-all text-xs shadow-lg shadow-red-600/20 disabled:bg-gray-800 disabled:text-gray-500"
+                          >
                             {status === "IDLE" && "SEND"}
                             {status === "SENDING" && "SENDING..."}
                             {status === "SUCCESS" && "SENT"}
