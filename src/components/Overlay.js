@@ -278,86 +278,36 @@ export default function Portfolio() {
                       </div>
                     </Section>
 
-                    {/* 7. CONTACT */}
-                    <Section>
-                      <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-20">
-                        <div>
-                          <h1 className="text-5xl md:text-7xl font-black uppercase mb-8 leading-none">
+                      {/* 7. CONTACT */}
+                      <Section>
+                        <div className="flex flex-col items-start gap-10">
+                          <h1 className="text-5xl md:text-7xl font-black uppercase leading-none">
                             INITIATE<br /><span className="text-red-600">STRATEGY</span>
                           </h1>
-                          <p className="text-gray-300 mb-10 max-w-md font-light leading-relaxed">
-                            Based in Prishtina. Deploying worldwide. Currently accepting selective freelance projects and long-term technical partnerships.
+                          <p className="text-gray-300 max-w-md font-light leading-relaxed">
+                            Based in Prishtina. Deploying worldwide. Currently accepting selective
+                            freelance projects and long-term technical partnerships.
                           </p>
-                          <div className="space-y-4 font-mono text-sm uppercase">
-                            <a
-                              href="mailto:kastriootaliiu@gmail.com"
-                              className="block text-red-600 hover:text-white transition-colors border-b border-red-600/20 pb-2 w-fit italic pointer-events-auto"
+                          <div className="space-y-4 font-mono text-sm uppercase pointer-events-auto">
+                            
+                             <a href="mailto:kastriootaliiu@gmail.com"
+                              className="block text-red-600 hover:text-white transition-colors border-b border-red-600/20 pb-2 w-fit italic"
                             >
                               kastriootaliiu@gmail.com
                             </a>
-                            <div className="flex gap-8 items-center pointer-events-auto">
-                              <a
-                                href="https://github.com/askoti"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest"
-                              >
+                            <div className="flex gap-8 items-center">
+                              <a href="https://github.com/askoti" target="_blank" rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-white transition-colors tracking-widest">
                                 GitHub
                               </a>
-                              <a
-                                href="https://linkedin.com/in/kastriootaliiu"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white cursor-pointer transition-colors font-mono text-xs uppercase tracking-widest"
-                              >
+                              <a href="https://linkedin.com/in/kastriootaliiu" target="_blank" rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-white transition-colors tracking-widest">
                                 LinkedIn
                               </a>
                             </div>
                           </div>
                         </div>
-
-                        <form
-                          onSubmit={handleSubmit}
-                          className="flex flex-col gap-6 bg-black/40 p-10 backdrop-blur-xl border border-white/10 relative overflow-hidden pointer-events-auto"
-                        >
-                          <div className="absolute top-0 left-0 w-1 h-full bg-red-600"></div>
-                          <div className="space-y-6">
-                            <input
-                              required
-                              type="text"
-                              placeholder="NAME / COMPANY"
-                              value={formData.identity}
-                              onChange={(e) => setFormData((f) => ({ ...f, identity: e.target.value }))}
-                              className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors text-[12px] tracking-widest uppercase font-mono"
-                            />
-                            <input
-                              required
-                              type="email"
-                              placeholder="EMAIL"
-                              value={formData.email}
-                              onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
-                              className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors text-[12px] tracking-widest uppercase font-mono"
-                            />
-                            <textarea
-                              required
-                              placeholder="YOUR PROJECT"
-                              value={formData.message}
-                              onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))}
-                              className="w-full bg-transparent border-b border-white/20 py-3 outline-none focus:border-red-600 transition-colors h-32 text-[12px] tracking-widest uppercase font-mono resize-none"
-                            />
-                          </div>
-                          <button
-                            disabled={status === "SENDING"}
-                            className="bg-red-600 text-white font-black py-5 uppercase tracking-[0.3em] hover:bg-white hover:text-red-600 transition-all text-xs shadow-lg shadow-red-600/20 disabled:bg-gray-800 disabled:text-gray-500"
-                          >
-                            {status === "IDLE" && "SEND"}
-                            {status === "SENDING" && "SENDING..."}
-                            {status === "SUCCESS" && "SENT"}
-                            {status === "ERROR" && "TRY AGAIN"}
-                          </button>
-                        </form>
-                      </div>
-                    </Section>
+                      </Section>
 
                   </div>
                 </Scroll>
